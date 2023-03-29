@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Web3Modal from "web3modal";
-import { providers, Contract } from "ethers";
+import { providers, Contract, Signer } from "ethers";
 import Img from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { WHITELIST_CONTRACT_ADDRESS, abi } from "../constants";
@@ -121,7 +121,7 @@ export default function Home() {
         signer
       );
       // Get the address associated to the signer which is connected to  MetaMask
-      const address = await signer.getAddress();
+      const address = await (signer as Signer).getAddress();
       // call the whitelistedAddresses from the contract
       const _joinedWhitelist = await whitelistContract.whitelistedAddresses(
         address
